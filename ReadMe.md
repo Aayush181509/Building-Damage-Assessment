@@ -1,6 +1,8 @@
 # DISCLAIMER
 This scripted pipeline was developed to work on Windows 10 and as such is not guaranteed to work with Linux or iOS systems. 
 
+![Damage Prediction in collected UAV Images](image/Banepa.png)
+
 # Folder contents
 ├── config
 │   └── config_eval.yaml
@@ -112,4 +114,5 @@ Once the installation is complete calling the script can be done in two ways.
 * To run the script with up-sampling add “upsampling=True” to the script call
   * `python inference.py file_name=<name_of_file_in_”input”_dir> upsampling=True`
   * The default parameters are already set to the values that produced the best results on a Sentinel-2 test image.
+
 
