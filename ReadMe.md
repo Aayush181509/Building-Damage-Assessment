@@ -3,44 +3,6 @@ This scripted pipeline was developed to work on Windows 10 and as such is not gu
 
 ![Damage Prediction in collected UAV Images](image/Banepa.png)
 
-# Folder contents
-├── config
-│   └── config_eval.yaml
-├── cv2_supersample
-│   └── EDSR
-│   └── ESPCN
-│   └── FSRCNN
-│   └── LapSRN
-├── input
-│   └── Default path of input_dir in config file
-├── models
-│   └── ave.pth
-│   └── f_api_Moza_and_Ita_FN_v2.hdf5
-│   └── Mozambique_damage_detection_fn.hdf5
-├── outputs-eval
-│   └── Generated on script run and contains all results
-├── temp
-│   └── All temporary intermediate files are saved here and cleaned at the end of each run. 
-├── adaptive_sieve_functions.py
-├── building_segmentation.py
-├── damage_classification.py
-├── dataset.py
-├── DEEP_class.txt
-├── DEEP_class.yml
-├── DEEP_seg.txt
-├── DEEP_seg.yml
-├── DEEPGis.py
-├── gdal_polygonize.py
-├── gdal_sieve.py
-├── inference.py
-├── model.py
-├── new_polygonize.py
-├── ReadMe.md
-├── spec-file.txt
-├── tiling_functions.py
-├── upsampling_functions.py
-├── utils.py
-
 # Environement setup:
 * Conda or Miniconda is necesary to setup the environment.
   * I recommend Miniconda if you do not use Conda already. 
