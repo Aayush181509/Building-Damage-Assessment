@@ -1,0 +1,68 @@
+#Tilling parameters
+tile_size_x: 1024
+tile_size_y: 1024
+temp_dir: temp
+input_dir: input
+input_name: tile_0_0.tif
+
+#Upscaling parameters
+#For descriptions of methods please refere to:
+# https://docs.opencv.org/4.x/d8/df8/tutorial_table_of_content_dnn_superres.html 
+# https://learnopencv.com/super-resolution-in-opencv/
+#Upscalling factor used. Note that an upscalling of a factor of 2 will increase the image size by a factor of 4.
+#Since both the size in x and y direction are increased by 2. Depending on the model used some upscaling fctors are not possible.
+#In these cases upsampling to this factor will revert to cv2.INTER_CUBIC.
+upsample: False
+upsampling_method: lapsrn
+upsampling_factor: 2
+patch_ratio: 6
+combination_len: 4
+cv2_super_path: cv2_supersample
+
+#SEGMENTATION MODEL PARAMETERS
+#model back-bone
+run_segmentation: True
+model_dir: models
+seg_model_name: efficientnet-b2
+#checkpoint to load
+seg_model_weights: ave.pth
+#inference image width should in power of 32, making the image size width*width.
+width: 1024
+batch_size: 1
+#inference data with *.tif or *.jpg images
+data_dir: temp
+#TTA flip dimension 3|2|23
+flip: 0
+#TTA - transpose image
+transpose: False
+scale_factor: 1.0
+#some FPN modifications ....
+use_attention: True
+use_context_block: True
+use_mish: True
+#Threshold to outputs logits 
+threshold: 0.50
+#empty mining thresholds/output dir
+mine_empty: False
+output_dir_empty: xxx
+empty_threshold: 0.2
+#Show intermediate
+show_intermediate: False
+output_dir: ./outputs-eval
+
+#Sieving parameters
+sieve_size_m2: 9
+sieve_connectedness: 4
+
+#CLASSIFICATION MODEL PARAMETERS
+run_classification: True
+class_model_name: Mozambique_damage_detection_fn.hdf5
+damage_precision: 0
+
+#Cleanup
+clear_temp: True
+
+hydra:
+  run:
+    # Output directory for normal runs
+    dir: ${output_dir}/${now:%Y-%m-%d_%H-%M-%S}

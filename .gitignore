@@ -1,0 +1,7 @@
+*.tif
+*.vrt
+outputs-eval/*
+__pycache__
+temp/*
+input
+models

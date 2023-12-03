@@ -1,0 +1,44 @@
+Here's my cheat sheet to running the AI (DEEP):
+-----------------------------------------------
+#1. Copy DEEP_pipeline to the root of C: or D:
+#2. Install Anaconda from here: https://www.anaconda.com/products/distribution
+#3. In the start menu, look for Anaconda Prompt (Anaconda3) and run it
+#4. Run the following commands, say yes to any prompts
+cd\DEEP_pipeline
+conda env create -f DEEP_seg.yml
+conda env create -f DEEP_class.yml
+conda activate DEEP_seg
+#The two "conda env create" commands you only need to run the first time you use DEEP, for any future times you can skip them.
+#5. Put a geoTIF into the C:\DEEP_pipeline\input folder or use the one that's already there called: MacrungoHospital.tif
+#6. Run the following command (or replace MacrungoHospital.tif with a tif of your own), then wait a potentially long time
+python inference.py input_name=MacrungoHospital.tif 
+#7. Go look for the results under C:\DEEP_pipeline\outputs-eval\some-date-and-time\segmentation
+#8. You should see two files there, one is SEGMENTATION_SIEVED.tif which is a TIF file with the buildings in it, you don't really need to worry about that unless you want to do an accurate building count (see notes). The other is buildings_damage_class.geojson
+#9. Download the QGIS Standalone Installer from here: https://www.qgis.org/en/site/forusers/download.html
+#10. Open QGIS and drag the original geotif, and buildings_damage_class.geojson into the layers box
+#11. In the layers, double click on the buildings_damage_class layer
+#12. On the left click on Symbology
+#13. Select Categorised
+#14. Under Value select Condition
+#15. Under Color ramp select Random Colors
+#16. Click on the green plus near the bottom, it should pop a colour and the words all other... into the main block.
+#17. Change the colour to green and set the value to 0
+#18. Click on the green plus again, this time set the color to red and the value to 1
+#19. Click on apply, then the undamaged buildings will be green and the damaged ones red
+#20. Tell everyone who is listening that you just successfully ran AI (My OCD needed a 20th step)
+
+Notes:
+-The only issue I've seen a couple of times is that the laptop runs out of virtual memory. When I manually set the virtual memory to a high level this goes away.
+-The second time you run DEEP all you need to do are:
+	-Click on start and look for Anaconda Prompt (Anaconda3)
+	-Run the following commands, say yes to any prompts:
+		cd\DEEP_pipeline
+		conda activate DEEP_seg
+		python inference.py input_name=some_geo_tif_you_have.tif
+-If you want to do an accurate building count and the slicing of the tiles is affecting that, pull SEGMENTATION_SIEVED.tif into QGIS
+	-Then click on Raster -> Conversion -> Polygonize -> Run
+	-With the resulting new vector layer you can select the buildings you want to count and get an untiled count.
+-If you've somehow messed up any of the environments, you can delete them with the following commands:
+		conda env remove -n DEEP_seg
+		conda env remove -n DEEP_class
+	Once that's done go back to step 4 and try again.
